@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -22,12 +23,12 @@ public class ToDoController {
     }
 
     @GetMapping(value = "/getList",produces = "application/json")
-    public ResponseEntity<Set<ToDoList>> getToDoList(){
-        return new ResponseEntity<Set<ToDoList>>(service.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ToDoList>> getToDoList(){
+        return new ResponseEntity<List<ToDoList>>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/getItemByName/{name}",produces = "application/json")
-    public ResponseEntity<ToDoList> getItemByName(@PathVariable("id") String name){
+    public ResponseEntity<ToDoList> getItemByName(@PathVariable("name") String name){
         return new ResponseEntity<ToDoList>(service.findByName(name), HttpStatus.OK);
     }
 
@@ -37,7 +38,7 @@ public class ToDoController {
     }
 
     @DeleteMapping(value = "/deleteItemByName/{name}",produces = "application/json")
-    public ResponseEntity<String>  deleteItemByName(@PathVariable("id") String name){
+    public ResponseEntity<String>  deleteItemByName(@PathVariable("name") String name){
         return new ResponseEntity<String>(service.deleteItem(name), HttpStatus.OK);
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -30,6 +31,6 @@ public class ToDoList {
     private String progress;
 
     @Column(name="date")
-    private Date date;
+    private LocalDate date;
 
 }
