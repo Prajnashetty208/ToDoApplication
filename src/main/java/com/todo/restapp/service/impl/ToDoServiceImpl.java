@@ -1,5 +1,6 @@
 package com.todo.restapp.service.impl;
 
+import com.todo.restapp.exception.DuplicateItemException;
 import com.todo.restapp.exception.ItemNotFoundException;
 import com.todo.restapp.model.ToDoList;
 import com.todo.restapp.repository.ToDoRepo;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 @Service
 public class ToDoServiceImpl implements ToDoService {
@@ -20,9 +22,14 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public String save(ToDoList obj){
+        if(repo.findById(obj.getName()).isPresent()) this.throwException();
         obj.setDate(LocalDate.now());
         repo.save(obj);
         return "Saved successfully";
+    }
+
+    private Consumer<? super ToDoList> throwException() {
+        throw new DuplicateItemException("Item already present in database");
     }
 
     @Override
@@ -34,6 +41,11 @@ public class ToDoServiceImpl implements ToDoService {
     public ToDoList findByName(String id) {
         return this.repo.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("Details not found"));
+    }
+
+    @Override
+    public ToDoList findByStatus(String status) {
+        return this.repo.findByStatus(status);
     }
 
     @Override

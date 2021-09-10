@@ -2,3 +2,12 @@ server:
   port: 8089
 
 entries: 5
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+

@@ -7,4 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ToDoRepo extends JpaRepository<ToDoList, String> { }
+public interface ToDoRepo extends JpaRepository<ToDoList, String> {
+
+    @Query(value = "SELECT * FROM todolist_table "+
+            " WHERE status = :status", nativeQuery = true)
+    ToDoList findByStatus(@Param("status") String status);
+}

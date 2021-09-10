@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class ToDoController {
     private ToDoService service;
 
     @PostMapping(value = "/save", consumes = "application/json")
-    public ResponseEntity<String> saveToDoList(@RequestBody ToDoList request){
+    public ResponseEntity<String> saveToDoList(@Valid @RequestBody ToDoList request){
         return new ResponseEntity<String>(service.save(request), HttpStatus.OK);
     }
 
@@ -32,8 +33,13 @@ public class ToDoController {
         return new ResponseEntity<ToDoList>(service.findByName(name), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/getItemByStatus/{status}",produces = "application/json")
+    public ResponseEntity<ToDoList> getItemByStatus(@PathVariable("status") String status){
+        return new ResponseEntity<ToDoList>(service.findByStatus(status), HttpStatus.OK);
+    }
+
     @PutMapping (value = "/updateItem", consumes = "application/json")
-    public ResponseEntity<String> updateItem(@RequestBody ToDoList request){
+    public ResponseEntity<String> updateItem(@Valid @RequestBody ToDoList request){
        return new ResponseEntity<String>(service.updateItem(request), HttpStatus.OK);
     }
 
