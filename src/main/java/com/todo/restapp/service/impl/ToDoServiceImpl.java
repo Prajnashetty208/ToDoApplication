@@ -6,30 +6,28 @@ import com.todo.restapp.model.ToDoList;
 import com.todo.restapp.repository.ToDoRepo;
 import com.todo.restapp.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
 
 @Service
 public class ToDoServiceImpl implements ToDoService {
+
+    @Value("${entries}")
+    private int maxEntries;
 
     @Autowired
     private ToDoRepo repo;
 
     @Override
     public String save(ToDoList obj){
-        if(repo.findById(obj.getName()).isPresent()) this.throwException();
+        if(repo.findById(obj.getName()).isPresent()) throw new DuplicateItemException("Item already present in database");
+        if(repo.findByDate(LocalDate.now()) > maxEntries-1) throw new DuplicateItemException("List full for the day");
         obj.setDate(LocalDate.now());
         repo.save(obj);
         return "Saved successfully";
-    }
-
-    private Consumer<? super ToDoList> throwException() {
-        throw new DuplicateItemException("Item already present in database");
     }
 
     @Override
