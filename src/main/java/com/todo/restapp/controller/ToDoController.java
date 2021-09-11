@@ -34,8 +34,8 @@ public class ToDoController {
     }
 
     @GetMapping(value = "/getItemByStatus/{status}",produces = "application/json")
-    public ResponseEntity<ToDoList> getItemByStatus(@PathVariable("status") String status){
-        return new ResponseEntity<ToDoList>(service.findByStatus(status), HttpStatus.OK);
+    public ResponseEntity<List<ToDoList>> getItemByStatus(@PathVariable("status") String status){
+        return new ResponseEntity<List<ToDoList>>(service.findByStatus(status), HttpStatus.OK);
     }
 
     @PutMapping (value = "/updateItem", consumes = "application/json")

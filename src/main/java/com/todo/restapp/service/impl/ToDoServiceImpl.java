@@ -42,7 +42,7 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public ToDoList findByStatus(String status) {
+    public List<ToDoList> findByStatus(String status) {
         return this.repo.findByStatus(status);
     }
 

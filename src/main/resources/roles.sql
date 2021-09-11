@@ -1,0 +1,3 @@
+INSERT INTO TODOSCHEMA.ROLES_TABLE VALUES
+('user','$2a$12$ecDHxb/5SZjB61iOAZNHpuoFQu7sPtXBD7t69B9XyujaOwBCEMBVy','USER');
+//Password=pass Bcrypt encoded

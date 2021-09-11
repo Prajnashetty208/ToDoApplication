@@ -9,7 +9,7 @@ public interface ToDoService {
     String save(ToDoList obj);
     List<ToDoList> findAll();
     ToDoList findByName(String id);
-    ToDoList findByStatus(String status);
+    List<ToDoList> findByStatus(String status);
     String updateItem(ToDoList obj);
     String deleteItem(String id);
 

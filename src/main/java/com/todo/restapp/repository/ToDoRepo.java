@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface ToDoRepo extends JpaRepository<ToDoList, String> {
 
-    @Query(value = "SELECT COUNT(*) FROM todolist_table "+
+    @Query(value = "SELECT COUNT(*) FROM todoschema.todolist_table "+
             " WHERE date = :date", nativeQuery = true)
     int findByDate(LocalDate date);
 
-    ToDoList findByStatus(String status);
+    List<ToDoList> findByStatus(String status);
 }

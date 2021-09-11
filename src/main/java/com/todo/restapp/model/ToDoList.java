@@ -16,7 +16,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "todolist_table")
+@Table(name = "todolist_table",schema = "todoschema")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
