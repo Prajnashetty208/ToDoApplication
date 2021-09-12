@@ -2,3 +2,17 @@ server:
   port: 8089
 
 entries: 5
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;INIT=CREATE SCHEMA IF NOT EXISTS todoschema
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+
+
