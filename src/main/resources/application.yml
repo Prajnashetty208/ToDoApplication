@@ -14,5 +14,14 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: sa
+  application:
+    name: spring-cloud-eureka-client
 
-
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+#  instance:
+#    hostname: localhost
